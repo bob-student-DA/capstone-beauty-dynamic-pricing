@@ -10,3 +10,4 @@
 | 2026-10-06 | Salon profile: 186 appts, 43.9 weeks, 1 provider, ~4/week, deposits all 0 | Forecast weekly instead of daily; clustering k = 2-4 | B, E |
 | 2026-10-06 | Confirmed licenses: salon Apache 2.0, hotel CC BY 4.0 | Cite both; raw data not redistributed | C (governance) |
 | 2026-10-08 | Zeng & Lin (2022) used simulated cases only | Replaced with Thommen & Hintermann (2023) field experiment for elasticity values | A |
+| 2026-10-08 | Scenario price-response assumptions set from Thommen & Hintermann (2023) | Committed scenarios.py before any analysis | B, E3, F1 |
