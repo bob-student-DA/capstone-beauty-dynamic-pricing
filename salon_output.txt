@@ -1,0 +1,146 @@
+(186, 12)
+<class 'pandas.DataFrame'>
+RangeIndex: 186 entries, 0 to 185
+Data columns (total 12 columns):
+ #   Column               Non-Null Count  Dtype  
+---  ------               --------------  -----  
+ 0   appointment_hash     186 non-null    str    
+ 1   client_pid           186 non-null    str    
+ 2   provider_pid         186 non-null    str    
+ 3   services             186 non-null    str    
+ 4   booking_method       186 non-null    str    
+ 5   status               186 non-null    str    
+ 6   deposit_amount       186 non-null    int64  
+ 7   deposit_collected    186 non-null    bool   
+ 8   charge_hash          165 non-null    str    
+ 9   appt_datetime_utc    186 non-null    str    
+ 10  booked_datetime_utc  186 non-null    str    
+ 11  card_exp_year        52 non-null     float64
+dtypes: bool(1), float64(1), int64(1), str(9)
+memory usage: 16.3 KB
+
+Missing values:
+ charge_hash       21
+card_exp_year    134
+dtype: int64
+                                    appointment_hash  client_pid  \
+0  e65a69f03395cf1714976bcded41418571003014a676fd...  Client_105   
+1  a1df894d96675bdd23df9a701ffcb0b3aac44f6ad674c3...  Client_064   
+2  fe5da58adef34c224e34699e0ae91dad58ff4c310d95bf...  Client_022   
+3  16640665331a36c8b45a35b27aa846b71050c1e829be01...  Client_079   
+4  b2b4633d7294fb0785bf4cf899f0071c478157dfb2dee1...  Client_084   
+
+   provider_pid                                     services  booking_method  \
+0  Provider_001  Women's Haircut (Add on deep conditioning )  Self-Scheduled   
+1  Provider_001                              Women's Haircut  Self-Scheduled   
+2  Provider_001                               All over color  Self-Scheduled   
+3  Provider_001                  Balayage/lived in/Foilayage  Self-Scheduled   
+4  Provider_001  Partial Custom Highlight, Add on base color  Self-Scheduled   
+
+      status  deposit_amount  deposit_collected  \
+0  cancelled               0              False   
+1  completed               0              False   
+2  completed               0              False   
+3  completed               0              False   
+4  completed               0              False   
+
+                                         charge_hash     appt_datetime_utc  \
+0                                                NaN  2025-02-13T10:00:00Z   
+1  1eaaf197db40adee2a37bb689a09a6cd126fab9091916b...  2025-02-27T09:00:00Z   
+2  8518a65435c1bbeb016e1d2fe36ab217045a9cfb42cd8b...  2025-03-17T15:00:00Z   
+3  5eb22f2454c8a1cf335e75eee280bc9a574fadb10d9b2a...  2025-03-26T14:30:00Z   
+4  df9f604d703e0268a8f86885eb0c64f6b3639f1187514c...  2025-03-27T12:00:00Z   
+
+    booked_datetime_utc  card_exp_year  
+0  2025-02-11T18:38:00Z         2028.0  
+1  2025-02-05T12:55:00Z            NaN  
+2  2025-03-03T11:26:00Z            NaN  
+3  2025-03-07T17:50:00Z            NaN  
+4  2025-03-09T12:01:00Z            NaN  
+
+Date range: 2025-02-13 10:00:00+00:00 to 2025-12-18 09:50:00+00:00
+Weeks covered: 43.9
+
+Status:
+ status
+completed    160
+cancelled     22
+no_show        3
+checkout       1
+Name: count, dtype: int64
+
+Providers:
+ provider_pid
+Provider_001    186
+Name: count, dtype: int64
+
+Booking method:
+ booking_method
+Self-Scheduled    149
+Online Booking     37
+Name: count, dtype: int64
+
+Unique services: 39
+services
+Women's Haircut                                40
+Balayage/lived in/Foilayage                    17
+All over color                                 15
+Signature Blonde Session                       14
+Gloss with haircut                             11
+Balayage/Foilayage partial                     11
+Full custom Highlight                           8
+Partial Custom Highlight                        8
+Partial Custom Highlight, Add on base color     7
+Root touch-up with cut                          6
+Free Consultation|Color Correction|             5
+Mini Custom Highlight, Add on base color        5
+Blowout/styling                                 4
+Womens Dry Cut                                  4
+Add on base color, Full custom Highlight        3
+Name: count, dtype: int64
+
+Deposit amounts:
+ deposit_amount
+0    186
+Name: count, dtype: int64
+
+Duplicate appointment_hash: 0
+Negative lead times: 2
+
+Lead time (days):
+ count    186.000000
+mean      23.930108
+std       24.237127
+min       -4.000000
+25%        4.000000
+50%       14.000000
+75%       43.750000
+max       98.000000
+Name: lead_days, dtype: float64
+
+Bookings by day of week (UTC):
+ appt_dt
+Wednesday    34
+Saturday     33
+Thursday     31
+Friday       25
+Sunday       25
+Monday       22
+Tuesday      16
+Name: count, dtype: int64
+
+Bookings by hour (UTC):
+ appt_dt
+1      1
+8      1
+9     30
+10    23
+11    24
+12    24
+13    18
+14    18
+15    16
+16    19
+17    10
+18     2
+Name: count, dtype: int64
