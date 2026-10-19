@@ -11,3 +11,4 @@
 | 2026-10-06 | Confirmed licenses: salon Apache 2.0, hotel CC BY 4.0 | Cite both; raw data not redistributed | C (governance) |
 | 2026-10-08 | Zeng & Lin (2022) used simulated cases only | Replaced with Thommen & Hintermann (2023) field experiment for elasticity values | A |
 | 2026-10-08 | Scenario price-response assumptions set from Thommen & Hintermann (2023) | Committed scenarios.py before any analysis | B, E3, F1 |
+| 2026-10-19 | scenarios.py (committed 10-08) used one elasticity per scenario and varied shift_share 0.3-0.7; Task 2 C4 specifies separate discount/premium elasticities with shift_share ~0.5 | Corrected scenarios.py to match C4 (conservative -0.57/-0.95, base -0.70/-0.70, optimistic -0.95/-0.57, shift_share 0.5); added PRICE_GRID, TRAIN_FRAC, SEED. No results had been generated yet | B, E3 |
