@@ -1,0 +1,13 @@
+service_group,volume,peak_share,median_lead,cancel_rate,log_volume,cluster,cluster_name
+Women's Haircut,37,0.4444444444444444,12.0,0.21621621621621623,3.6375861597263857,0,High-volume / high-cancel
+Other,16,0.3125,26.5,0.1875,2.833213344056216,2,Planned-ahead
+Partial Custom Highlight,16,0.5,25.5,0.0625,2.833213344056216,2,Planned-ahead
+Signature Blonde Session,12,0.5,6.5,0.25,2.5649493574615367,0,High-volume / high-cancel
+Full Custom Highlight,11,0.2727272727272727,10.0,0.0,2.4849066497880004,1,Off-peak flexible
+All Over Color,11,0.5454545454545454,7.0,0.0,2.4849066497880004,3,Peak-driven color
+Balayage (Full),10,0.7,11.0,0.1,2.3978952727983707,3,Peak-driven color
+Gloss with Haircut,10,0.5,32.0,0.1,2.3978952727983707,2,Planned-ahead
+Balayage (Partial),8,0.25,30.5,0.125,2.1972245773362196,2,Planned-ahead
+Mini Custom Highlight,6,0.16666666666666666,5.5,0.0,1.9459101490553132,1,Off-peak flexible
+Root Touch-Up with Cut,5,0.6,6.0,0.0,1.791759469228055,3,Peak-driven color
+Consultation,3,,,,,-1,Not clustered (free)
