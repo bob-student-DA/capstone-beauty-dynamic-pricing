@@ -1,0 +1,9 @@
+policy,cluster,peak premium,off-peak discount,revenue change (cons / base / opt)
+A: grid,High-volume / high-cancel,"+20% (9:00, 10:00, 12:00)",none,+1.0% / +1.5% / +1.7%
+A: grid,Off-peak flexible,"+20% (9:00, 10:00, 12:00)",none,+1.7% / +2.6% / +3.0%
+A: grid,Planned-ahead,"+20% (9:00, 10:00, 12:00)",none,+2.7% / +4.1% / +4.8%
+A: grid,Peak-driven color,"+20% (9:00, 10:00, 12:00)",none,+4.1% / +6.3% / +7.4%
+B: targeted,High-volume / high-cancel,"+10% (9:00, 10:00, 12:00)",none,+0.6% / +0.8% / +0.9%
+B: targeted,Off-peak flexible,none,"-10% (13:00, 15:00, 17:00)",-1.2% / -0.9% / -0.4%
+B: targeted,Planned-ahead,"+10% (9:00, 10:00, 12:00)",none,+1.7% / +2.3% / +2.6%
+B: targeted,Peak-driven color,"+10% (9:00, 10:00, 12:00)",none,+2.6% / +3.6% / +4.0%

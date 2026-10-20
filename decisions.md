@@ -18,3 +18,4 @@
 | 2026-10-19 | Hotel ADR: 1 negative, 1,959 zero-rate (complimentary) and 1 extreme (5,400) | Flagged adr_valid = False (1,961 rows, 1.6%); kept for booking counts and cancellation rate, excluded from nightly-rate analysis only | D |
 | 2026-10-19 | Hotel data has 32,001 exact duplicate rows (26.8%) and no booking ID | Reported, not removed: identical rows may be separate rooms in one group booking (D4) | C1, D |
 | 2026-10-19 | Data preparation completed | Planned end Oct 15; finished Oct 19 (4 days late)| B |
+| 2026-10-19 | Grid search returned +20% / 0% for every cluster (inelastic, uniform elasticities) | Evaluated the pre-registered grid policy (A) for H1a/H1b as planned; added a cluster-targeted ±10% comparison policy (B) designed after the grid result, reflecting hotel weekday ADR spread (6.5%) and the D5a premium-discount pairing | B, E3, F2 |
