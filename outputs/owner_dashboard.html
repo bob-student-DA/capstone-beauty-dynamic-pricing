@@ -1,0 +1,200 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pricing Your Busy Hours</title>
+<style>
+  :root { --ink:#1f2328; --muted:#5b6470; --bg:#faf8f5; --card:#ffffff; --line:#e6e1da;
+          --now:#b8b2aa; --new:#2f6f8f; --busy:#c0592b; --quiet:#2f6f8f; --steady:#8a8178; --good:#2e7d4f; --bad:#b03a2e; }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--bg); color:var(--ink); font:16px/1.55 -apple-system, "Segoe UI", Roboto, Arial, sans-serif; }
+  main { max-width:960px; margin:0 auto; padding:32px 16px 48px; }
+  h1 { font-size:30px; line-height:1.2; margin:0 0 8px; }
+  h2 { font-size:22px; margin:40px 0 12px; }
+  h3 { font-size:17px; margin:0 0 4px; }
+  p { margin:0 0 10px; }
+  .lead { font-size:18px; color:var(--muted); max-width:680px; }
+  .grid3 { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:12px; margin-top:20px; }
+  .card, .svc, .tool { background:var(--card); border:1px solid var(--line); border-radius:12px; padding:16px 18px; }
+  .card .k { font-size:13px; text-transform:uppercase; letter-spacing:.04em; color:var(--muted); }
+  .card .v { font-size:20px; font-weight:600; margin-top:4px; }
+  .busy { color:var(--busy); } .quiet { color:var(--quiet); }
+  .tool { display:grid; grid-template-columns:280px 1fr; gap:24px; padding:20px; }
+  @media (max-width:760px) { .tool { grid-template-columns:1fr; } }
+  label { display:block; font-weight:600; font-size:14px; margin:14px 0 6px; }
+  label:first-child { margin-top:0; }
+  select, input[type=number] { width:100%; font:inherit; padding:8px 10px; border:1px solid var(--line); border-radius:8px; background:#fff; }
+  input[type=range] { width:100%; accent-color:var(--new); }
+  .val { float:right; font-weight:600; color:var(--new); }
+  .hint { font-size:13px; color:var(--muted); margin-top:4px; }
+  .result .big { font-size:34px; font-weight:700; line-height:1.1; }
+  .result .sub { color:var(--muted); margin-top:6px; }
+  .moves { display:flex; flex-wrap:wrap; gap:8px 20px; margin:14px 0 4px; font-size:15px; }
+  .tip { background:#f3efe9; border-radius:8px; padding:10px 12px; font-size:14px; margin-top:12px; display:none; }
+  svg text { font-family:inherit; }
+  .legend { display:flex; gap:16px; font-size:13px; color:var(--muted); margin-top:4px; }
+  .sw { display:inline-block; width:12px; height:12px; border-radius:3px; vertical-align:-1px; margin-right:6px; }
+  ol.steps { padding-left:20px; margin:0; } ol.steps li { margin-bottom:10px; }
+  .svcgrid { display:grid; grid-template-columns:repeat(2,1fr); gap:12px; }
+  @media (max-width:640px) { .svcgrid { grid-template-columns:1fr; } }
+  .svc .members { font-size:13px; color:var(--muted); }
+  .svc .todo { margin:0; }
+  details { margin-top:40px; background:var(--card); border:1px solid var(--line); border-radius:12px; padding:14px 18px; }
+  summary { cursor:pointer; font-weight:600; }
+  details ul { color:var(--muted); font-size:14px; padding-left:20px; }
+</style></head>
+<body><main>
+
+<h1>Your busiest hours could earn you so much more</h1>
+<p class="lead">Looking back at almost a year of appointments for a salon owner, some hours fill up again and again while others sit
+half-empty. Charging a little more when you are in demand can raise your revenue without losing many clients.</p>
+
+<div class="grid3">
+  <div class="card"><div class="k">Your busiest times are</div><div class="v busy">9 am, 10 am, 12 pm</div></div>
+  <div class="card"><div class="k">Your quietest times are</div><div class="v quiet">1 pm, 3 pm, 5 pm</div></div>
+  <div class="card"><div class="k">How far ahead do clients book</div>
+    <div class="v">Busy hours: book about 3 weeks in advance<br>Quiet hours: book about 1 week in advance</div></div>
+</div>
+
+<h2>Try it yourself</h2>
+<div class="tool">
+  <div>
+    <label for="grp">Which services?</label>
+    <select id="grp"></select>
+    <label for="raise">Raise prices at busy times <span class="val" id="raiseV"></span></label>
+    <input type="range" id="raise" min="0" max="20" step="5" value="10">
+    <label for="disc">Lower prices at quiet times <span class="val" id="discV"></span></label>
+    <input type="range" id="disc" min="0" max="20" step="5" value="0">
+    <label for="price">Your average price for these services</label>
+    <input type="number" id="price" min="1" step="5" value="100">
+    <div class="hint">Use your own prices. See that it only changes the dollar amounts.</div>
+  </div>
+  <div class="result" aria-live="polite">
+    <div class="big" id="big"></div>
+    <div class="sub" id="range"></div>
+    <div class="moves" id="moves"></div>
+    <div class="hint" style="margin-top:12px">Bookings per month at each hour</div>
+    <svg id="chart" viewBox="0 0 600 260" width="100%" role="img" aria-label="Bookings per month by hour, today and with new prices"></svg>
+    <div class="legend"><span><span class="sw" style="background:var(--now)"></span>Today</span>
+      <span><span class="sw" style="background:var(--new)"></span>With new prices</span></div>
+    <div class="tip" id="tip"></div>
+  </div>
+</div>
+
+<h2>What to do next</h2>
+<div class="card"><ol class="steps">
+  <li><b>Start small.</b> Add about 10% to color services at 9 am, 10 am, 12 pm for 6 to 8 weeks.
+      Keep a few busy slots at your usual price so regulars still have a choice.</li>
+  <li><b>Fill quiet times with short offers, not permanent discounts.</b> A limited-time deal for
+      1 pm, 3 pm, 5 pm (for example, "book by Friday") moves clients without lowering what everyone else pays.</li>
+  <li><b>Cut no-shows on haircuts.</b> About 1 in 4 haircut and blonding bookings cancel or no-show.
+      A small deposit or a reminder text will protect more income than a all over price change.</li>
+</ol></div>
+
+<h2>By service</h2>
+<div class="svcgrid"><div class="svc"><h3>Color services</h3><p class="members">All over color, full balayage, root touch-up with cut</p><p>Six in ten of these bookings land in your busiest hours, and clients rarely cancel.</p><p class="todo"><b>Try:</b> a 10% busy-hour increase. This is where it makes the biggest difference.</p></div><div class="svc"><h3>Planned-ahead services</h3><p class="members">Partial highlights, gloss with haircut, partial balayage, and other services</p><p>Clients book about 4 weeks ahead, so most can pick another time if busy hours cost more.</p><p class="todo"><b>Try:</b> a modest busy-hour increase. Expect clients to change times rather than leave.</p></div><div class="svc"><h3>Highlights</h3><p class="members">Full and mini custom highlights</p><p>Most of these are already booked at quieter times.</p><p class="todo"><b>Try:</b> featuring these in quiet-time offers to fill empty afternoon slots.</p></div><div class="svc"><h3>Haircuts and blonding</h3><p class="members">Women's haircut, signature blonde session</p><p>Your most booked services, but about 1 in 4 cancel or no-show.</p><p class="todo"><b>Try:</b> a deposit or reminder text first. A busy-hour increase adds only a little here.</p></div></div>
+
+<details><summary>How these estimates work</summary>
+<ul>
+  <li>Based on 186 appointments from one stylist's booking log over about 44 weeks (White, 2025).</li>
+  <li>How clients react to price changes comes from a published study of off-peak pricing
+      (Thommen &amp; Hintermann, 2023), not from this salon. The range shows less and more flexible clients.</li>
+  <li>When busy-hour prices go up, a few clients book elsewhere and about half of them move to a quieter time instead.</li>
+  <li>Tested on the last 13 weeks of the log: a 20% busy-hour increase raised income by about 3% to 5%,
+      and every version beat flat pricing.</li>
+  <li>Monthly numbers are weekly averages times 4.3. Small salons vary a lot week to week, so treat these as a guide
+      and confirm with a short trial.</li>
+</ul></details>
+
+</main>
+<script>
+const D = {"hours": [{"label": "9 am", "tier": "peak"}, {"label": "10 am", "tier": "peak"}, {"label": "11 am", "tier": "mid"}, {"label": "12 pm", "tier": "peak"}, {"label": "1 pm", "tier": "off"}, {"label": "2 pm", "tier": "mid"}, {"label": "3 pm", "tier": "off"}, {"label": "4 pm", "tier": "mid"}, {"label": "5 pm", "tier": "off"}], "groups": [{"key": "all", "name": "All services", "clusters": ["3", "2", "1", "0"]}, {"key": "3", "name": "Color services", "clusters": ["3"]}, {"key": "2", "name": "Planned-ahead services", "clusters": ["2"]}, {"key": "1", "name": "Highlights", "clusters": ["1"]}, {"key": "0", "name": "Haircuts and blonding", "clusters": ["0"]}], "perWeek": {"3": [0.2045, 0.1136, 0.0455, 0.2273, 0.0455, 0.0682, 0.0909, 0.0909, 0.0], "2": [0.2273, 0.2273, 0.1818, 0.1364, 0.1591, 0.0682, 0.1818, 0.2273, 0.0682], "1": [0.0455, 0.0455, 0.0455, 0.0227, 0.0909, 0.0909, 0.0227, 0.0909, 0.0227], "0": [0.2273, 0.1364, 0.2273, 0.1591, 0.1136, 0.1591, 0.0682, 0.0, 0.1591]}, "scenarios": {"conservative": {"ep": 0.95, "ed": 0.57, "sh": 0.5}, "base": {"ep": 0.7, "ed": 0.7, "sh": 0.5}, "optimistic": {"ep": 0.57, "ed": 0.95, "sh": 0.5}}};
+const $ = id => document.getElementById(id);
+const MONTH = 52 / 12;
+const TIER_WORD = {peak: "busy", mid: "steady", off: "quiet"};
+const TIER_COLOR = {peak: "var(--busy)", mid: "var(--steady)", off: "var(--quiet)"};
+
+D.groups.forEach(g => { const o = document.createElement("option"); o.value = g.key; o.textContent = g.name; $("grp").appendChild(o); });
+
+function calc(clusters, p, d, sc) {
+  const n = D.hours.length, now = Array(n).fill(0), next = Array(n).fill(0);
+  let revNow = 0, revNew = 0, busyNow = 0, busyNew = 0, quietNow = 0, quietNew = 0;
+  const nOff = D.hours.filter(h => h.tier === "off").length;
+  clusters.forEach(c => {
+    const a = D.perWeek[c];
+    let pk = 0, md = 0, of = 0;
+    a.forEach((v, i) => { const t = D.hours[i].tier; if (t === "peak") pk += v; else if (t === "off") of += v; else md += v; });
+    const lost = pk * sc.ep * p, shifted = lost * sc.sh, gained = of * sc.ed * d;
+    const npk = pk - lost, nof = of + gained + shifted;
+    a.forEach((v, i) => {
+      const t = D.hours[i].tier;
+      now[i] += v;
+      next[i] += t === "peak" ? (pk ? v * npk / pk : 0) : t === "off" ? (of ? v * nof / of : nof / nOff) : v;
+    });
+    revNow += pk + md + of;
+    revNew += npk * (1 + p) + md + nof * (1 - d);
+    busyNow += pk; busyNew += npk; quietNow += of; quietNew += nof;
+  });
+  return {now, next, revNow, revNew, busyNow, busyNew, quietNow, quietNew};
+}
+
+const money = x => (x < 0 ? "\u2212$" : "+$") + Math.abs(Math.round(x)).toLocaleString();
+const one = x => (Math.round(x * 10) / 10).toFixed(1);
+
+function draw(now, next) {
+  const W = 600, H = 260, L = 34, B = 40, T = 10, n = now.length;
+  const max = Math.max(...now, ...next) * MONTH * 1.15 || 1;
+  const step = (W - L) / n, bw = step * 0.34, y = v => T + (H - T - B) * (1 - v / max);
+  let s = "";
+  const ticks = 4;
+  for (let k = 0; k <= ticks; k++) {
+    const v = max * k / ticks, yy = y(v);
+    s += `<line x1="${L}" x2="${W}" y1="${yy}" y2="${yy}" stroke="#ece7e0"/>`;
+    s += `<text x="${L - 6}" y="${yy + 4}" font-size="11" text-anchor="end" fill="#5b6470">${one(v)}</text>`;
+  }
+  D.hours.forEach((h, i) => {
+    const x0 = L + i * step + step * 0.14, a = now[i] * MONTH, b = next[i] * MONTH;
+    s += `<rect x="${x0}" y="${y(a)}" width="${bw}" height="${y(0) - y(a)}" rx="3" fill="var(--now)"><title>${h.label} today: ${one(a)} bookings a month</title></rect>`;
+    s += `<rect x="${x0 + bw + 2}" y="${y(b)}" width="${bw}" height="${y(0) - y(b)}" rx="3" fill="var(--new)"><title>${h.label} with new prices: ${one(b)} bookings a month</title></rect>`;
+    const cx = L + i * step + step / 2;
+    s += `<text x="${cx}" y="${H - B + 16}" font-size="12" text-anchor="middle" fill="#1f2328">${h.label}</text>`;
+    s += `<text x="${cx}" y="${H - B + 31}" font-size="11" text-anchor="middle" fill="${TIER_COLOR[h.tier]}">${TIER_WORD[h.tier]}</text>`;
+  });
+  $("chart").innerHTML = s;
+}
+
+function update() {
+  const g = D.groups.find(x => x.key === $("grp").value);
+  const p = +$("raise").value / 100, d = +$("disc").value / 100;
+  const price = Math.max(0, +$("price").value || 0);
+  $("raiseV").textContent = p ? `+${p * 100}%` : "no change";
+  $("discV").textContent = d ? `\u2212${d * 100}%` : "no change";
+
+  const res = {};
+  for (const k in D.scenarios) res[k] = calc(g.clusters, p, d, D.scenarios[k]);
+  const base = res.base;
+  const gain = k => (res[k].revNew - res[k].revNow) * price * MONTH;
+  const pct = base.revNow ? (base.revNew - base.revNow) / base.revNow * 100 : 0;
+
+  if (!p && !d) {
+    $("big").textContent = "Same as today";
+    $("range").textContent = "Move a slider to see what changes.";
+  } else {
+    const gs = Object.keys(res).map(gain), lo = Math.min(...gs), hi = Math.max(...gs);
+    $("big").innerHTML = `${money(gain("base"))} a month <span style="font-size:18px;color:${pct >= 0 ? "var(--good)" : "var(--bad)"}">(${pct >= 0 ? "+" : "\u2212"}${Math.abs(pct).toFixed(1)}%)</span>`;
+    $("range").textContent = `Likely between ${money(lo)} and ${money(hi)} a month, depending on how your clients react.`;
+  }
+  $("moves").innerHTML =
+    `<span><b class="busy">Busy-hour</b> bookings: ${one(base.busyNow * MONTH)} \u2192 ${one(base.busyNew * MONTH)} a month</span>` +
+    `<span><b class="quiet">Quiet-hour</b> bookings: ${one(base.quietNow * MONTH)} \u2192 ${one(base.quietNew * MONTH)} a month</span>`;
+  draw(base.now, base.next);
+
+  const tips = [];
+  if (d > 0) tips.push("Discounts also lower the price for clients who would have booked anyway, so they usually cost more than they bring in. Use them for specific slots you need to fill.");
+  if (p > 0.10) tips.push("Bigger increases look better on paper, but regulars are more likely to notice. Hotels change weekday rates by only about 6 to 7%.");
+  $("tip").style.display = tips.length ? "block" : "none";
+  $("tip").textContent = tips.join(" ");
+}
+["grp", "raise", "disc", "price"].forEach(id => $(id).addEventListener("input", update));
+update();
+</script>
+</body></html>
