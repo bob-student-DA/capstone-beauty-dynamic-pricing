@@ -30,3 +30,4 @@
 | 2026-10-20 | Evaluation and pricing scenarios complete | Planned end Oct 25| B |
 | 2026-10-20 | First dashboard draft (Plotly dropdowns) used heavy analysis terms and was hard for non technical potential business owners to read | Rebuilt as a plain-language single HTML page with one interactive 'what-if tool' (JavaScript, no Plotly); math mirrors pricing.py and verified in notebook 07 | B, G2 |
 | 2026-10-20 | Dashboard completed | Planned end Oct 27; finished Oct 20 | B |
+| 2026-10-20 | Dashboard terms from the analysis (revenue index, elasticity, scenario) would be hard for non-technical owners to read | Built the Plotly dashboard as a plain-language page: busy/steady/quiet hours, everyday service names, dollars per month, scenario filter labeled Cautious / Most likely / Hopeful; math mirrors pricing.py and is verified in notebook 07 | B, G2 |
